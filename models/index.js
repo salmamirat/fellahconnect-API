@@ -1,43 +1,53 @@
-'use strict';
+const User = require("./User");
+const Role = require("./Role");
+const Agriculteur = require("./Agriculteur");
+const Parcelle = require("./Parcelle");
+const Produit = require("./Produit");
+const Recolte = require("./Recolte");
+const Marche = require("./Marche");
+const PrixMarche = require("./PrixMarche");
+const OffreVente = require("./OffreVente");
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const process = require('process');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+Role.hasMany(User, { foreignKey: "roleId" });
+User.belongsTo(Role, { foreignKey: "roleId" });
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
-    );
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
+User.hasOne(Agriculteur, { foreignKey: "userId" });
+Agriculteur.belongsTo(User, { foreignKey: "userId" });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
-module.exports = db;
+Agriculteur.hasMany(Parcelle, { foreignKey: "agriculteurId" });
+Parcelle.belongsTo(Agriculteur, { foreignKey: "agriculteurId" });
+
+
+Parcelle.hasMany(Recolte, { foreignKey: "parcelleId" });
+Recolte.belongsTo(Parcelle, { foreignKey: "parcelleId" });
+
+
+Produit.hasMany(Recolte, { foreignKey: "produitId" });
+Recolte.belongsTo(Produit, { foreignKey: "produitId" });
+
+
+Produit.hasMany(PrixMarche, { foreignKey: "produitId" });
+PrixMarche.belongsTo(Produit, { foreignKey: "produitId" });
+
+
+Marche.hasMany(PrixMarche, { foreignKey: "marcheId" });
+PrixMarche.belongsTo(Marche, { foreignKey: "marcheId" });
+
+
+Recolte.hasMany(OffreVente, { foreignKey: "recolteId" });
+OffreVente.belongsTo(Recolte, { foreignKey: "recolteId" });
+
+module.exports = {
+  User,
+  Role,
+  Agriculteur,
+  Produit,
+  Parcelle,
+  Recolte,
+  Marche,
+  PrixMarche,
+  OffreVente,
+};
