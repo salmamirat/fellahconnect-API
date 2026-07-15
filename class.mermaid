@@ -1,77 +1,76 @@
+```mermaid
 classDiagram
 
-class Role {
-    +id : Integer
-    +nom : String
-}
-
-class User {
-    +id : Integer
-    +nom : String
-    +email : String
-    +password : String
-    +roleId : Integer
+class Utilisateur {
+  +id : Integer
+  +nom : String
+  +email : String
+  +password : String
+  +role : String
 }
 
 class Agriculteur {
-    +id : Integer
-    +nom : String
-    +telephone : String
-    +region : String
-    +userId : Integer
+  +id : Integer
+  +telephone : String
+  +region : String
+  +utilisateurId : Integer
 }
 
 class Parcelle {
-    +id : Integer
-    +nom : String
-    +superficie : Float
-    +region : String
-    +agriculteurId : Integer
-}
-
-class Produit {
-    +id : Integer
-    +nom : String
-    +categorie : String
-    +unite : String
+  +id : Integer
+  +nom : String
+  +surface : Float
+  +ville : String
+  +agriculteurId : Integer
 }
 
 class Recolte {
-    +id : Integer
-    +quantite : Float
-    +dateRecolte : Date
-    +parcelleId : Integer
-    +produitId : Integer
+  +id : Integer
+  +quantite : Float
+  +date : Date
+  +parcelleId : Integer
+  +produitId : Integer
 }
 
-class Marche {
-    +id : Integer
-    +nom : String
-    +ville : String
+class Produit {
+  +id : Integer
+  +nom : String
+  +categorie : String
 }
 
 class PrixMarche {
-    +id : Integer
-    +prix : Float
-    +datePrix : Date
-    +produitId : Integer
-    +marcheId : Integer
+  +id : Integer
+  +prix : Decimal
+  +date : Date
+  +produitId : Integer
+  +marcheId : Integer
 }
 
-class OffreVente {
-    +id : Integer
-    +quantite : Float
-    +prixSouhaite : Float
-    +statut : String
-    +recolteId : Integer
+class Marche {
+  +id : Integer
+  +nom : String
+  +ville : String
 }
 
-Role "1" --> "*" User
-User "1" --> "1" Agriculteur
+class Offre {
+  +id : Integer
+  +quantite : Float
+  +prix : Decimal
+  +statut : String
+  +recolteId : Integer
+}
+
+Utilisateur "1" --> "1" Agriculteur
+
 Agriculteur "1" --> "*" Parcelle
-Parcelle "1" --> "*" Recolte
-Produit "1" --> "*" Recolte
-Produit "1" --> "*" PrixMarche
-Marche "1" --> "*" PrixMarche
-Recolte "1" --> "*" OffreVente
 
+Parcelle "1" --> "*" Recolte
+
+Produit "1" --> "*" Recolte
+
+Produit "1" --> "*" PrixMarche
+
+Marche "1" --> "*" PrixMarche
+
+Recolte "1" --> "1" Offre
+```
