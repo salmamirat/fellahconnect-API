@@ -7,18 +7,20 @@ const PORT = process.env.PORT || 3000;
 
 async function startServer() {
   try {
-    // Authenticate database connection
+<<<<<<< HEAD
+    // Authenticate database connection                                                                                                                                                                                                                                                                                                                                                                                                                                         
+=======
+>>>>>>> 75b31b80b5ad395d3d9aedffa09a96070555362f
     await sequelize.authenticate();
     console.log("Database connected successfully.");
 
-    // Sync database models if needed in development
-    // Note: In production it is highly recommended to use migrations.
+    
     if (process.env.NODE_ENV === "development") {
       await sequelize.sync({ alter: true });
       console.log("Database models synchronized.");
     }
 
-    // Start Express server
+  
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
