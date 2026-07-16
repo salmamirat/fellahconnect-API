@@ -1,76 +1,84 @@
-```mermaid
 classDiagram
 
-class Utilisateur {
+class Role {
   +id : Integer
   +nom : String
+}
+
+class User {
+  +id : Integer
+  +name : String
   +email : String
   +password : String
-  +role : String
+  +roleId : Integer
 }
 
 class Agriculteur {
   +id : Integer
+  +nom : String
   +telephone : String
   +region : String
-  +utilisateurId : Integer
+  +userId : Integer
 }
 
 class Parcelle {
   +id : Integer
   +nom : String
-  +surface : Float
-  +ville : String
+  +superficie : Float
+  +region : String
   +agriculteurId : Integer
-}
-
-class Recolte {
-  +id : Integer
-  +quantite : Float
-  +date : Date
-  +parcelleId : Integer
-  +produitId : Integer
 }
 
 class Produit {
   +id : Integer
   +nom : String
   +categorie : String
+  +unite : String
 }
 
-class PrixMarche {
+class Recolte {
   +id : Integer
-  +prix : Decimal
-  +date : Date
+  +quantite : Float
+  +dateRecolte : Date
+  +parcelleId : Integer
   +produitId : Integer
-  +marcheId : Integer
 }
 
 class Marche {
   +id : Integer
   +nom : String
   +ville : String
+  +region : String
 }
 
-class Offre {
+class PrixMarche {
+  +id : Integer
+  +prix : Float
+  +datePrix : Date
+  +produitId : Integer
+  +marcheId : Integer
+}
+
+class OffreVente {
   +id : Integer
   +quantite : Float
-  +prix : Decimal
+  +prixSouhaite : Float
   +statut : String
   +recolteId : Integer
 }
 
-Utilisateur "1" --> "1" Agriculteur
+Role "1" --> "0..*" User : has
 
-Agriculteur "1" --> "*" Parcelle
+User "1" --> "1" Agriculteur : profile
 
-Parcelle "1" --> "*" Recolte
+Agriculteur "1" --> "0..*" Parcelle : owns
 
-Produit "1" --> "*" Recolte
+Parcelle "1" --> "0..*" Recolte : produces
 
-Produit "1" --> "*" PrixMarche
+Produit "1" --> "0..*" Recolte : harvested
 
-Marche "1" --> "*" PrixMarche
+Produit "1" --> "0..*" PrixMarche : priced
 
-Recolte "1" --> "1" Offre
-```
+Marche "1" --> "0..*" PrixMarche : records
+
+Recolte "1" --> "0..*" OffreVente : offered
