@@ -1,0 +1,11 @@
+### Test API
+GET http://localhost:3000/farmers
+
+### Test Agent AI
+POST http://localhost:3000/agent
+Content-Type: application/json
+
+{
+  "prompt": "Test agent AI",
+  "task": "verify agent response"
+}
