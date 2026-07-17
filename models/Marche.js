@@ -1,39 +1,31 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
-const Recolte = sequelize.define(
-  "Recolte",
+const Marche = sequelize.define(
+  "Marche",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-
-    quantite: {
-      type: DataTypes.FLOAT,
+    nom: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-
-    dateRecolte: {
-      type: DataTypes.DATEONLY,
+    ville: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-
-    parcelleId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-
-    produitId: {
-      type: DataTypes.INTEGER,
+    region: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
-    tableName: "recoltes",
+    tableName: "marches",
     timestamps: true,
   }
 );
 
-module.exports = Recolte;
+module.exports = Marche;

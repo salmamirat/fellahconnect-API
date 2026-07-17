@@ -9,7 +9,7 @@ router.post("/", authenticate, authorize("admin"), produitController.createProdu
 
 router.get("/", authenticate, produitController.getAllProduits);
 
-router.get("/:id/meilleur-prix", authenticate, produitController.getMeilleurPrix);
+router.get("/:id/best-price", authenticate, produitController.getMeilleurPrix);
 
 router.get("/:id", authenticate, produitController.getProduitById);
 

@@ -11,7 +11,7 @@ router.get("/", authenticate, agriculteurController.getAllAgriculteurs);
 
 router.get("/:id", authenticate, agriculteurController.getAgriculteurById);
 
-router.get("/:id/parcelles", authenticate, agriculteurController.getAgriculteurParcelles);
+router.get("/:id/plots", authenticate, agriculteurController.getAgriculteurParcelles);
 
 router.put("/:id", authenticate, authorize("admin"), agriculteurController.updateAgriculteur);
 

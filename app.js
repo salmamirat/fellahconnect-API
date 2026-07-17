@@ -4,7 +4,16 @@ require("dotenv").config();
 
 const { requestLogger } = require("./middlewares/logger.middleware");
 const { errorHandler, notFoundHandler } = require("./middlewares/error.middleware");
+
 const authRoutes = require("./routes/auth.routes");
+const agriculteurRoutes = require("./routes/agriculteur.routes");
+const parcelleRoutes = require("./routes/parcelle.routes");
+const produitRoutes = require("./routes/produit.routes");
+const marcheRoutes = require("./routes/marche.routes");
+const prixMarcheRoutes = require("./routes/prixMarche.routes");
+const recolteRoutes = require("./routes/recolte.routes");
+const offreVenteRoutes = require("./routes/offreVente.routes");
+const agentRoutes = require("./routes/agent.routes");
 
 const app = express();
 
@@ -22,6 +31,14 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/farmers", agriculteurRoutes);
+app.use("/parcelles", parcelleRoutes);
+app.use("/products", produitRoutes);
+app.use("/marches", marcheRoutes);
+app.use("/prix-marches", prixMarcheRoutes);
+app.use("/harvests", recolteRoutes);
+app.use("/offres", offreVenteRoutes);
+app.use("/agent", agentRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
