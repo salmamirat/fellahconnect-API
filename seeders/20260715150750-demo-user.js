@@ -1,4 +1,3 @@
-"use strict";
 const bcrypt = require("bcrypt");
 
 module.exports = {
@@ -11,7 +10,7 @@ module.exports = {
         nom: "Admin FellahConnect",
         email: "admin@fellahconnect.ma",
         password: hashedAdmin,
-        roleId: 1, // admin
+        roleId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -19,7 +18,7 @@ module.exports = {
         nom: "Ahmed Bennani",
         email: "ahmed.bennani@fellahconnect.ma",
         password: hashedFarmer,
-        roleId: 2, // farmer
+        roleId: 2,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

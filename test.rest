@@ -1,11 +1,343 @@
-### Test API
-GET http://localhost:3000/farmers
+### ===========================
+### Health Check
+### ===========================
+GET http://localhost:3000/health
 
-### Test Agent AI
+### ===========================
+### AUTH
+### ===========================
+
+### Register Admin
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "nom": "Admin FellahConnect",
+  "email": "admin@fellahconnect.ma",
+  "password": "admin123",
+  "roleId": 1
+}
+
+### Register Farmer
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "nom": "Ahmed El Fellah",
+  "email": "ahmedd@fellah.ma",
+  "password": "farmer123",
+  "roleId": 2
+}
+
+### Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@fellahconnect.ma",
+  "password": "admin123"
+}
+
+### ===========================
+### AGRICULTEURS
+### ===========================
+
+@token = Bearer 
+
+### Create Agriculteur
+POST http://localhost:3000/agriculteurs
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "nom": "Ahmed El Fellah",
+  "telephone": "+212600000001",
+  "region": "Souss-Massa",
+  "userId": 2
+}
+
+### Get All Agriculteurs
+GET http://localhost:3000/agriculteurs
+Authorization: {{token}}
+
+### Get Agriculteur by ID
+GET http://localhost:3000/agriculteurs/1
+Authorization: {{token}}
+
+### Get Agriculteur Parcelles
+GET http://localhost:3000/agriculteurs/1/parcelles
+Authorization: {{token}}
+
+### Update Agriculteur
+PUT http://localhost:3000/agriculteurs/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "nom": "Ahmed Updated",
+  "telephone": "+212600000002",
+  "region": "Marrakech-Safi"
+}
+
+### Delete Agriculteur
+DELETE http://localhost:3000/agriculteurs/1
+Authorization: {{token}}
+
+### ===========================
+### PARCELLES
+### ===========================
+
+### Create Parcelle
+POST http://localhost:3000/parcelles
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "nom": "Parcelle Nord",
+  "superficie": 2.5,
+  "region": "Souss-Massa",
+  "agriculteurId": 1
+}
+
+### Get All Parcelles
+GET http://localhost:3000/parcelles
+Authorization: {{token}}
+
+### Get Parcelle by ID
+GET http://localhost:3000/parcelles/1
+Authorization: {{token}}
+
+### Update Parcelle
+PUT http://localhost:3000/parcelles/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "nom": "Parcelle Nord Updated",
+  "superficie": 3.0,
+  "region": "Souss-Massa"
+}
+
+### Delete Parcelle
+DELETE http://localhost:3000/parcelles/1
+Authorization: {{token}}
+
+### ===========================
+### PRODUITS
+### ===========================
+
+### Create Produit
+POST http://localhost:3000/produits
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "nom": "Tomate",
+  "categorie": "Légume",
+  "unite": "kg"
+}
+
+### Get All Produits
+GET http://localhost:3000/produits
+Authorization: {{token}}
+
+### Get Produit by ID
+GET http://localhost:3000/produits/1
+Authorization: {{token}}
+
+### Get Best Price for Produit
+GET http://localhost:3000/produits/1/best-price
+Authorization: {{token}}
+
+### Update Produit
+PUT http://localhost:3000/produits/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "nom": "Tomate Cerise",
+  "categorie": "Légume"
+}
+
+### Delete Produit
+DELETE http://localhost:3000/produits/1
+Authorization: {{token}}
+
+### ===========================
+### RECOLTES
+### ===========================
+
+### Create Recolte
+POST http://localhost:3000/recoltes
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "quantite": 500,
+  "dateRecolte": "2026-07-15",
+  "parcelleId": 1,
+  "produitId": 1
+}
+
+### Get All Recoltes
+GET http://localhost:3000/recoltes
+Authorization: {{token}}
+
+### Get Recolte by ID
+GET http://localhost:3000/recoltes/1
+Authorization: {{token}}
+
+### Update Recolte
+PUT http://localhost:3000/recoltes/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "quantite": 600,
+  "dateRecolte": "2026-07-16"
+}
+
+### Delete Recolte
+DELETE http://localhost:3000/recoltes/1
+Authorization: {{token}}
+
+### ===========================
+### MARCHES
+### ===========================
+
+### Create Marche
+POST http://localhost:3000/marches
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "nom": "Souk El Had",
+  "ville": "Agadir",
+  "region": "Souss-Massa"
+}
+
+### Get All Marches
+GET http://localhost:3000/marches
+Authorization: {{token}}
+
+### Get Marche by ID
+GET http://localhost:3000/marches/1
+Authorization: {{token}}
+
+### Update Marche
+PUT http://localhost:3000/marches/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "nom": "Souk El Had Updated",
+  "ville": "Agadir",
+  "region": "Souss-Massa"
+}
+
+### Delete Marche
+DELETE http://localhost:3000/marches/1
+Authorization: {{token}}
+
+### ===========================
+### PRIX MARCHES
+### ===========================
+
+### Create Prix Marche
+POST http://localhost:3000/prix-marches
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "prix": 8.50,
+  "datePrix": "2026-07-17",
+  "produitId": 1,
+  "marcheId": 1
+}
+
+### Get All Prix Marches
+GET http://localhost:3000/prix-marches
+Authorization: {{token}}
+
+### Get Prix Marche by ID
+GET http://localhost:3000/prix-marches/1
+Authorization: {{token}}
+
+### Update Prix Marche
+PUT http://localhost:3000/prix-marches/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "prix": 9.00,
+  "datePrix": "2026-07-17"
+}
+
+### Delete Prix Marche
+DELETE http://localhost:3000/prix-marches/1
+Authorization: {{token}}
+
+### ===========================
+### OFFRES VENTE
+### ===========================
+
+### Create Offre Vente
+POST http://localhost:3000/offres-vente
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "quantite": 200,
+  "prixSouhaite": 10.00,
+  "recolteId": 1
+}
+
+### Get All Offres Vente
+GET http://localhost:3000/offres-vente
+Authorization: {{token}}
+
+### Get Offre Vente by ID
+GET http://localhost:3000/offres-vente/1
+Authorization: {{token}}
+
+### Update Offre Vente
+PUT http://localhost:3000/offres-vente/1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "quantite": 250,
+  "prixSouhaite": 11.00
+}
+
+### Delete Offre Vente
+DELETE http://localhost:3000/offres-vente/1
+Authorization: {{token}}
+
+### ===========================
+### AGENT AI
+### ===========================
+
+### Chat with Agent
 POST http://localhost:3000/agent
 Content-Type: application/json
 
 {
-  "prompt": "Test agent AI",
-  "task": "verify agent response"
+  "message": "Quel est le prix de la tomate?"
+}
+
+### Ask for all products
+POST http://localhost:3000/agent
+Content-Type: application/json
+
+{
+  "message": "Quels sont les produits disponibles?"
+}
+
+### Ask for markets
+POST http://localhost:3000/agent
+Content-Type: application/json
+
+{
+  "message": "Liste-moi tous les marchés disponibles"
 }
