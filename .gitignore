@@ -1,6 +1,4 @@
-#  node_modules/
-#  .env
-#  .env.example
-#  docker-compose.yml
-#  dockerfile
- 
+node_modules/
+.env
+.env.local
+*.log
